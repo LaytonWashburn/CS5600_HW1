@@ -73,45 +73,30 @@ class xor_percep:
 class xor_percep2:
     def __init__(self):
         ## your code here
-        self.and_weights = np.array([0.51, 0.51])
-        self.and_bias = 1
-        self.or_weights = np.array([0.51, 0.51])
-        self.or_bias = 0
-        self.not_weights = np.array([1])
-        self.not_bias = 1
-
-
+        self.x1_weights = np.array([1.05, -1.05])
+        self.x2_weights = np.array([-1.05, 1.05])
+        self.x3_weights = np.array([1.05, 1.05])
+        self.x1_bias = -1
+        self.x2_bias = -1
+        self.x3_bias = -1
+        
 
     def output(self, x):
         ## your code here
-        ### Or
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(x)):
-            res += (x[i] * self.or_weights[i])
-        or_res =  1 if res > (self.or_bias) else 0
+        
+        ## Perceptron 1
+        res1 = x.dot(self.x1_weights) + self.x1_bias
 
-        ### And 1
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(x)):
-            res += (x[i] * self.and_weights[i])
-        and_res =  np.array([1 if res > (self.and_bias) else 0])
+        ## Perceptron 2
+        res2 = x.dot(self.x2_weights) + self.x2_bias
 
-        ### NOT
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(and_res)):
-            res += (and_res[i] * self.not_weights[i])
-        not_res = 1 if res < (self.not_bias) else 0
+        input_3 = np.array([1 if res1 > 0 else 0, 1 if res2 > 0 else 0])
 
-        ### Turn the results of two inputs into array
-        final_res = np.array([or_res, not_res])
-
-        ### AND 2
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(final_res)):
-            res += (final_res[i] * self.and_weights[i])
+        ## Perceptron 3
+        res3 = input_3.dot(self.x3_weights) + self.x3_bias
         
         ### Return the results as an numpy array
-        return  np.array([1 if res > (self.and_bias) else 0])
+        return  np.array([1 if res3 > 0 else 0])
 
 
 class percep_net:

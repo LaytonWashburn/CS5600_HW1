@@ -12,31 +12,27 @@ class and_percep:
 
     def __init__(self):
         ## your code here
-        self.weights = np.array([0.51, 0.51])
-        self.bias = 1
+        self.weights = np.array([1, 1])
+        self.bias = -1
 
     def output(self, x):
         ## your code here
         # Loop through the nodes
         # Do the dot product
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(x)):
-            res += (x[i] * self.weights[i])
-        return 1 if res > (self.bias) else 0
+        res = x.dot(self.weights) + self.bias
+        return 1 if res > 0 else 0
            
 class or_percep:
     
     def __init__(self):
         ## your code here
-        self.weights = np.array([0.51, 0.51])
-        self.bias = 0
+        self.weights = np.array([1.05, 1.05])
+        self.bias = -1
 
     def output(self, x):
         ## your code here
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(x)):
-            res += (x[i] * self.weights[i])
-        return 1 if res > (self.bias) else 0
+        res = x.dot(self.weights) + self.bias
+        return 1 if res > 0 else 0
 
 
 class not_percep:
@@ -44,16 +40,14 @@ class not_percep:
     def __init__(self):
         ## your code here
         ## your code here
-        self.weights = np.array([1])
-        self.bias = 1
+        self.weights = np.array([-1])
+        self.bias = 0.05
 
     def output(self, x):
         ## your code here
         ## your code here
-        res = 0 # Variable to hold result of summation of dot products
-        for i in range(0, len(x)):
-            res += (x[i] * self.weights[i])
-        return 1 if res < (self.bias) else 0
+        res = x.dot(self.weights) + self.bias
+        return 1 if res > 0 else 0
 
 
 class xor_percep:
